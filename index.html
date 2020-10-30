@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Title</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg1">
+  <div class="mainCont">
+    <div class="display" id="logIn">
+      <h2 id="loginTitle">Log In</h2>
+      <p>Username: <input type="text"></p>
+      <p>Password: <input type="text"></p>
+      <button id="loginBtn">Login</button>
+      <p id="bTxt">Don't have an account? Make an account <a href="#" onclick="newAcc()">here.</a></p>
+    </div>
+
+    <div class="display" id="managePass">
+      <h2>Manage Accounts</h2>
+      <p><input type="text" placeholder="Search">
+      <button>&plus; account</button>
+      <button>&minus; account</button>
+      <button id="logOut">Log Out</button>
+    </p>
+    </div>
+  </div>
+
+  <!-- Load JavaScript -->
+  <script src="helperFunctions.js"></script>
+  <script src="main.js"></script>
+  
+</body>
+
+</html>
