@@ -7,13 +7,21 @@
 </head>
 
 <body class="bg1">
-  <div class="mainCont">
+  <div class="mainCont" id="content">
     <div class="display" id="logIn">
       <h2 id="loginTitle">Log In</h2>
-      <p>Username: <input type="text"></p>
-      <p>Password: <input type="text"></p>
+      <p>Username: <input type="text" id="username"></p>
+      <p>Password: <input type="text" id="password"></p>
       <button id="loginBtn">Login</button>
-      <p id="bTxt">Don't have an account? Make an account <a href="#" onclick="newAcc()">here.</a></p>
+      <p id="bTxt">Don't have an account? Make an account <a href="#" onclick="displayDiv('createAcc')">here.</a></p>
+    </div>
+
+    <div class="display" id="createAcc">
+      <h2>Create New Account</h2>
+      <p>Username: <input type="text" id='newUser'></p>
+      <p>Password: <input type="text" id='newPass'></p>
+      <button id="createAccBtn">Create Account</button>
+      <p id="bTxt">Already have an account? Log in <a href="#" onclick="displayDiv('logIn')">here.</a></p>
     </div>
 
     <div class="display" id="managePass">
@@ -23,7 +31,18 @@
       <button>&minus; account</button>
       <button id="logOut">Log Out</button>
     </p>
+
+    <div class="display" id="form">
+      <h2>Add Account Information</h2>
+     
+      <p>Website: <input type="text" id=""></p>
+      <p>Username: <input type="text" id=""></p>
+      <p>Email: <input type="text" id=""></p>
+      <p>Password: <input type="text" id=""></p>
+      <p><button>Add Info</button></p>
     </div>
+    </div>
+   
   </div>
 
   <!-- Load JavaScript -->

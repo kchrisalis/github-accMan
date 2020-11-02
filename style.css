@@ -29,6 +29,6 @@ body {
     padding: 20px;
 }
 
-#managePass {
+#managePass, #createAcc {
     display: none;
 }
