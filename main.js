@@ -32,5 +32,11 @@ function clickHandler() {
     } else if (event.target.id == "addInfo") {
       addAcc();
     }
+
+    if (event.target.id == "add") {
+      document.getElementById("form").style.display = "block";
+    } else if (event.target.nodeName == "BUTTON") {
+      document.getElementById("form").style.display = "none";
+    }
   }
 }
