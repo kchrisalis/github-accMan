@@ -1,5 +1,9 @@
 // Account Manager
 
+// Arrays
+let loginAccounts = initAcc();
+let addAccounts = initInfo();
+
 // Event Listener
 document.addEventListener("click", clickHandler);
 
@@ -13,7 +17,7 @@ function clickHandler() {
       document.body.classList.remove('bg1');
 
 
-    } else if  (event.target.id == "logOut") {
+    } else if (event.target.id == "logOut") {
       clearDivs();
       displayDiv("logIn")
       document.body.classList.add('bg1');
@@ -21,7 +25,12 @@ function clickHandler() {
 
     } else if (event.target.id == "createAccBtn") {
       createLogin();
+
+    } else if (event.target.id == "add") {
+      document.getElementById("form").style.display = "block";
+
+    } else if (event.target.id == "addInfo") {
+      addAcc();
     }
   }
 }
-

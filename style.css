@@ -32,3 +32,11 @@ body {
 #managePass, #createAcc {
     display: none;
 }
+
+.adding {
+    width: 400px;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: rgba(221, 213, 193, 0.877);
+    display: none;
+}

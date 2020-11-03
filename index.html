@@ -8,6 +8,8 @@
 
 <body class="bg1">
   <div class="mainCont" id="content">
+
+    <!-- Log In  -->
     <div class="display" id="logIn">
       <h2 id="loginTitle">Log In</h2>
       <p>Username: <input type="text" id="username"></p>
@@ -16,6 +18,7 @@
       <p id="bTxt">Don't have an account? Make an account <a href="#" onclick="displayDiv('createAcc')">here.</a></p>
     </div>
 
+    <!-- Create Account -->
     <div class="display" id="createAcc">
       <h2>Create New Account</h2>
       <p>Username: <input type="text" id='newUser'></p>
@@ -24,22 +27,24 @@
       <p id="bTxt">Already have an account? Log in <a href="#" onclick="displayDiv('logIn')">here.</a></p>
     </div>
 
+    <!-- Once logged in, table of accounts -->
     <div class="display" id="managePass">
       <h2>Manage Accounts</h2>
       <p><input type="text" placeholder="Search">
-      <button>&plus; account</button>
+      <button id="add">&plus; account</button>
       <button>&minus; account</button>
       <button id="logOut">Log Out</button>
     </p>
 
-    <div class="display" id="form">
+    <!-- Adding accounts to table -->
+    <div class="adding" id="form">
       <h2>Add Account Information</h2>
      
-      <p>Website: <input type="text" id=""></p>
-      <p>Username: <input type="text" id=""></p>
-      <p>Email: <input type="text" id=""></p>
-      <p>Password: <input type="text" id=""></p>
-      <p><button>Add Info</button></p>
+      <p>Website: <input type="text" id="webV" class="formClear"></p>
+      <p>Username: <input type="text" id="userV" class="formClear"></p>
+      <p>Email: <input type="text" id="emailV" class="formClear"></p>
+      <p>Password: <input type="text" id="passV" class="formClear"></p>
+      <p><button id ="addInfo">Add Info</button></p>
     </div>
     </div>
    

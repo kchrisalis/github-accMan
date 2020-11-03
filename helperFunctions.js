@@ -1,12 +1,19 @@
 // Helper Functions 
 
-// Arrays
-let loginAccounts = initAcc();
-
+// Initialize Accounts
 function initAcc() {
   let storedlogAcc = localStorage.getItem('loginAcc');
   if (storedlogAcc) {
     return JSON.parse(storedlogAcc);
+  } else {
+    return [];
+  }
+}
+
+function initInfo() {
+  let storedAccs = localStorage.getItem('addAcc');
+  if (storedAccs) {
+    return JSON.parse(storedAccs);
   } else {
     return [];
   }
@@ -63,6 +70,7 @@ function createLogin() {
   }
 }
 
+// Check if value exists
 function check(array, userInputVal, checkItem) {
   for (let i = 0; i < array.length; i++) {
     if (userInputVal.value.toLowerCase() == array[i].checkItem.toLowerCase()) {
@@ -70,5 +78,24 @@ function check(array, userInputVal, checkItem) {
     } else {
       return false;
     }
+  }
+}
+
+// Add Accounts to Table
+function addAcc() {
+  addAccounts.push({
+    website: document.getElementById("webV").value,
+    username: document.getElementById("userV").value,
+    email: document.getElementById("emailV").value,
+    password: document.getElementById("passV").value
+  });
+
+  localStorage.setItem('addAcc', JSON.stringify(addAccounts));
+  console.log(addAccounts);
+
+  // Clear Inputs
+  let formInputEl = document.querySelectorAll("input", ".formClear");
+  for (let i = 0; i < formInputEl.length; i++) {
+    formInputEl[i].value = "";
   }
 }
