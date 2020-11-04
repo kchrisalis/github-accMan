@@ -39,14 +39,14 @@ function displayDiv(divId) {
 }
 
 // Log In
-function login () {
+function login() {
 
 }
 
 // Create Account
 function createLogin() {
   // Check if username exists
-  if (check(loginAccounts, nUser, username) == true) {
+  if (check(loginAccounts, nUser, "username") == true) {
     alert('Taken username. Choose another one');
   } else if (nUser.value == "" || nPass.value == "") {
     alert("Please fill in all fields");
@@ -73,7 +73,7 @@ function createLogin() {
 // Check if value exists
 function check(array, userInputVal, checkItem) {
   for (let i = 0; i < array.length; i++) {
-    if (userInputVal.value.toLowerCase() == array[i].checkItem.toLowerCase()) {
+    if (userInputVal.value.toLowerCase() == array[i][checkItem].toLowerCase()) {
       return true;
     } else {
       return false;
@@ -98,4 +98,15 @@ function addAcc() {
   for (let i = 0; i < formInputEl.length; i++) {
     formInputEl[i].value = "";
   }
+}
+
+function createRow(array) {
+  let tREl = document.createElement('tr');
+  tREl.innerHTML = `
+  <td>${array.website}</td>
+  <td>${array.username}</td>
+  <td>${array.email}</td>
+  <td>${array.password}</td>
+  `
+  document.getElementById('testTable').append(tREl);
 }
