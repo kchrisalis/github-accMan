@@ -44,14 +44,17 @@ function clearDivs() {
 function displayDiv(divId) {
   clearDivs();
   document.getElementById(divId).style.display = "block";
+
+  let inputEl = document.querySelectorAll("input");
+  for (let i = 0; i < inputEl.length; i++) {
+    inputEl[i].value = "";
+  }
 }
 
 // Log In
 function login() {
-  if (check(loginAccounts, user, username) && check(loginAccounts, pass, password)) {
-    console.log("success");
-  } else {
-    console.log("failure");
+  if (check(loginAccounts, user, "username") && check(loginAccounts, pass, "password")) {
+    return true;
   }
 }
 
@@ -87,8 +90,6 @@ function check(array, userInputVal, checkItem) {
   for (let i = 0; i < array.length; i++) {
     if (userInputVal.value.toLowerCase() == array[i][checkItem].toLowerCase()) {
       return true;
-    } else {
-      return false;
     }
   }
 }
@@ -99,44 +100,69 @@ function addAcc() {
     website: document.getElementById("webV").value,
     username: document.getElementById("userV").value,
     email: document.getElementById("emailV").value,
-    password: document.getElementById("passV").value
+    password: document.getElementById("passV").value,
   });
 
   localStorage.setItem('addAcc', JSON.stringify(addAccounts));
   console.log(addAccounts);
 
   // Clear Inputs
-  let formInputEl = document.querySelectorAll("input", ".formClear");
-  for (let i = 0; i < formInputEl.length; i++) {
-    formInputEl[i].value = "";
+  let inputEl = document.querySelectorAll("input");
+  for (let i = 0; i < inputEl.length; i++) {
+    inputEl[i].value = "";
   }
 }
 
-// Create rows in the account manager table
-function createRow(array) {
-  let tREl = document.createElement('tr');
-  tREl.innerHTML = `
-  <td>${array.website}</td>
-  <td>${array.username}</td>
-  <td>${array.email}</td>
-  <td>${array.password}</td>
-  <td><a href="#">Edit</a></td>
-  `
-  tREl.classList.add("rowContent");
 
-  document.getElementById('testTable').append(tREl);
-
-  return tREl;
-}
 
 // Redraw table
 function tableRedraw() {
-  let row = document.getElementsByClassName("rowContent");
-  for (let i = 0; i < row.length; i++) {
-    row[i].innerHTML = "";
-  }
-  
-  for (let i = 0; i < addAccounts.length; i++) {
-    document.getElementById("testTable").append(createRow(addAccounts[i]));
-  }
+  console.log('hello');
+  let divEl = document.createElement('div');
+  divEl.innerHTML = `
+  <table id= 'testTable'>
+  <tr id= "tableTitles">
+    <th>Website</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Password</th>
+  </tr>
+  `
+  return divEl;
 }
+
+// function tableRedraw(array) {
+//   let tableEl = document.createElement('table');
+//   tableEl.id = "testTable";
+
+//   let headerEl = document.createElement('th');
+//   headerEl.innerHTML = `
+//     <th>Website</th>
+//     <th>Username</th>
+//     <th>Email</th>
+//     <th>Password</th>
+//   `;
+//   tableEl.append(headerEl);
+
+//   let tREl = document.createElement('tr');
+//   tREl.innerHTML = `
+//   <td>${array.website}</td>
+//   <td>${array.username}</td>
+//   <td>${array.email}</td>
+//   <td>${array.password}</td>
+//   <td><a href="#" onclick="displayDiv('form')">Edit</a></td>
+//   `
+//   tREl.classList.add("rowContent");
+
+
+//   return tableEl;
+// }
+
+// Edit account information
+function editAcc() {
+
+}
+
+// redraw table function
+// individual ids
+// basically get the ids so that it can be deleted and edited

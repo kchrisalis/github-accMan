@@ -13,14 +13,18 @@ function clickHandler() {
 
     // Logging into the account manager
     if (event.target.id == "loginBtn") {
-      clearDivs();
-      // login();
-      displayDiv("managePass");
-      document.body.classList.add('bg2');
-      document.body.classList.remove('bg1');
-     
-      // Redraw Table
-      tableRedraw();
+      if (login()) {
+        clearDivs();
+        displayDiv("managePass");
+        document.body.classList.add('bg2');
+        document.body.classList.remove('bg1');
+        tableRedraw();
+
+      } else {
+        alert('Wrong username or password');
+        user.value = "";
+        pass.value = "";
+      }
 
       // Logging out of the account manager
     } else if (event.target.id == "logOut") {
@@ -28,6 +32,8 @@ function clickHandler() {
       displayDiv("logIn")
       document.body.classList.add('bg1');
       document.body.classList.remove('bg2');
+      user.value = "";
+      pass.value = "";
 
       // Creating a new login account
     } else if (event.target.id == "createAccBtn") {
@@ -41,7 +47,6 @@ function clickHandler() {
       // Adding information (about account) to the array
     } else if (event.target.id == "addInfo") {
       addAcc();
-
       tableRedraw();
 
       document.getElementById("form").style.display = "none";
