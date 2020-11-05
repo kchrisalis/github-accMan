@@ -6,7 +6,10 @@ function initAcc() {
   if (storedlogAcc) {
     return JSON.parse(storedlogAcc);
   } else {
-    return [];
+    return [{
+      username: "hello",
+      password: "1234"
+    }];
   }
 }
 
@@ -15,7 +18,12 @@ function initInfo() {
   if (storedAccs) {
     return JSON.parse(storedAccs);
   } else {
-    return [];
+    return [{
+      website: "instagram",
+      username: "something",
+      email: "something@gmail.com",
+      password: "1234"
+    }];
   }
 }
 
@@ -40,7 +48,11 @@ function displayDiv(divId) {
 
 // Log In
 function login() {
-
+  if (check(loginAccounts, user, username) && check(loginAccounts, pass, password)) {
+    console.log("success");
+  } else {
+    console.log("failure");
+  }
 }
 
 // Create Account
@@ -54,7 +66,7 @@ function createLogin() {
     console.log(loginAccounts);
     // Push account info to storage
     loginAccounts.push({
-      username: nUser.value.toLowerCase(),
+      username: nUser.value,
       password: nPass.value
     });
 
@@ -81,7 +93,7 @@ function check(array, userInputVal, checkItem) {
   }
 }
 
-// Add Accounts to Table
+// Add Accounts to Array
 function addAcc() {
   addAccounts.push({
     website: document.getElementById("webV").value,
@@ -100,6 +112,7 @@ function addAcc() {
   }
 }
 
+// Create rows in the account manager table
 function createRow(array) {
   let tREl = document.createElement('tr');
   tREl.innerHTML = `
@@ -107,6 +120,23 @@ function createRow(array) {
   <td>${array.username}</td>
   <td>${array.email}</td>
   <td>${array.password}</td>
+  <td><a href="#">Edit</a></td>
   `
+  tREl.classList.add("rowContent");
+
   document.getElementById('testTable').append(tREl);
+
+  return tREl;
+}
+
+// Redraw table
+function tableRedraw() {
+  let row = document.getElementsByClassName("rowContent");
+  for (let i = 0; i < row.length; i++) {
+    row[i].innerHTML = "";
+  }
+  
+  for (let i = 0; i < addAccounts.length; i++) {
+    document.getElementById("testTable").append(createRow(addAccounts[i]));
+  }
 }
