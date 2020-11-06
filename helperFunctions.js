@@ -1,5 +1,11 @@
 // Helper Functions 
 
+// Global Variables
+let user = document.getElementById("username");
+let pass = document.getElementById("password");
+let nUser = document.getElementById("newUser");
+let nPass = document.getElementById("newPass");
+
 // Initialize Accounts
 function initAcc() {
   let storedlogAcc = localStorage.getItem('loginAcc');
@@ -26,12 +32,6 @@ function initInfo() {
     }];
   }
 }
-
-// Global Variables
-let user = document.getElementById("username");
-let pass = document.getElementById("password");
-let nUser = document.getElementById("newUser");
-let nPass = document.getElementById("newPass");
 
 // Clear Page
 function clearDivs() {
@@ -94,6 +94,8 @@ function check(array, userInputVal, checkItem) {
   }
 }
 
+let id = 0;
+
 // Add Accounts to Array
 function addAcc() {
   addAccounts.push({
@@ -101,6 +103,7 @@ function addAcc() {
     username: document.getElementById("userV").value,
     email: document.getElementById("emailV").value,
     password: document.getElementById("passV").value,
+    edit: id++
   });
 
   localStorage.setItem('addAcc', JSON.stringify(addAccounts));
@@ -118,45 +121,41 @@ function addAcc() {
 // Redraw table
 function tableRedraw() {
   console.log('hello');
-  let divEl = document.createElement('div');
-  divEl.innerHTML = `
-  <table id= 'testTable'>
-  <tr id= "tableTitles">
-    <th>Website</th>
-    <th>Username</th>
-    <th>Email</th>
-    <th>Password</th>
-  </tr>
-  `
-  return divEl;
+  document.getElementById('tableDiv').innerHTML = "";
+
+  let tableEl = document.createElement('table');
+  tableEl.id = ('testTable');
+
+  let tREl = document.createElement('tr');
+  tREl.innerHTML = `<th>Website</th>
+  <th>Username</th>
+  <th>Email</th>
+  <th>Password</th>`;
+  tableEl.append(tREl);
+
+  for (let i = 0; i < addAccounts.length; i++) {
+    let newRow = tableEl.insertRow(-1);
+    let accInfo = Object.values(addAccounts[i]);
+
+    for (let w = 0; w < accInfo.length; w++) {
+      let newCell = newRow.insertCell(w);
+      newCell.innerHTML = accInfo[w];
+      newRow.append(newCell);
+
+      // if (w > accInfo) {
+      //   let editCell = newRow.insertCell(w);
+      //   editCell.innerHTML = `
+      //     <a href="#" data-set=i>Edit</a>`
+      //   newRow.append(editCell);
+      // }
+    }
+    tableEl.append(newRow);
+  }
+
+  return tableEl;
 }
 
-// function tableRedraw(array) {
-//   let tableEl = document.createElement('table');
-//   tableEl.id = "testTable";
 
-//   let headerEl = document.createElement('th');
-//   headerEl.innerHTML = `
-//     <th>Website</th>
-//     <th>Username</th>
-//     <th>Email</th>
-//     <th>Password</th>
-//   `;
-//   tableEl.append(headerEl);
-
-//   let tREl = document.createElement('tr');
-//   tREl.innerHTML = `
-//   <td>${array.website}</td>
-//   <td>${array.username}</td>
-//   <td>${array.email}</td>
-//   <td>${array.password}</td>
-//   <td><a href="#" onclick="displayDiv('form')">Edit</a></td>
-//   `
-//   tREl.classList.add("rowContent");
-
-
-//   return tableEl;
-// }
 
 // Edit account information
 function editAcc() {

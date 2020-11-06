@@ -18,7 +18,8 @@ function clickHandler() {
         displayDiv("managePass");
         document.body.classList.add('bg2');
         document.body.classList.remove('bg1');
-        tableRedraw();
+        document.getElementById('tableDiv').append(tableRedraw());
+        // addRow();
 
       } else {
         alert('Wrong username or password');
@@ -32,8 +33,6 @@ function clickHandler() {
       displayDiv("logIn")
       document.body.classList.add('bg1');
       document.body.classList.remove('bg2');
-      user.value = "";
-      pass.value = "";
 
       // Creating a new login account
     } else if (event.target.id == "createAccBtn") {
@@ -47,15 +46,17 @@ function clickHandler() {
       // Adding information (about account) to the array
     } else if (event.target.id == "addInfo") {
       addAcc();
-      tableRedraw();
-
       document.getElementById("form").style.display = "none";
       document.getElementById("testTable").style.display = "block";
+      document.getElementById('tableDiv').innerHTML = "";
+      document.getElementById('tableDiv').append(tableRedraw());
 
       // Leave the adding account form
     } else if (event.target.id == "cancel") {
       document.getElementById("form").style.display = "none";
       document.getElementById("testTable").style.display = "block";
+
+      document.getElementById('tableDiv').append(tableRedraw());
     }
   }
 }
