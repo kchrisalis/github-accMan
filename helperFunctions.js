@@ -1,6 +1,7 @@
 // Helper Functions 
 
 // Global Variables
+let id = 0;
 let user = document.getElementById("username");
 let pass = document.getElementById("password");
 let nUser = document.getElementById("newUser");
@@ -28,7 +29,8 @@ function initInfo() {
       website: "instagram",
       username: "something",
       email: "something@gmail.com",
-      password: "1234"
+      password: "1234",
+      edit: -1
     }];
   }
 }
@@ -94,10 +96,9 @@ function check(array, userInputVal, checkItem) {
   }
 }
 
-let id = 0;
-
 // Add Accounts to Array
 function addAcc() {
+
   addAccounts.push({
     website: document.getElementById("webV").value,
     username: document.getElementById("userV").value,
@@ -120,7 +121,6 @@ function addAcc() {
 
 // Redraw table
 function tableRedraw() {
-  console.log('hello');
   document.getElementById('tableDiv').innerHTML = "";
 
   let tableEl = document.createElement('table');
@@ -138,16 +138,18 @@ function tableRedraw() {
     let accInfo = Object.values(addAccounts[i]);
 
     for (let w = 0; w < accInfo.length; w++) {
-      let newCell = newRow.insertCell(w);
-      newCell.innerHTML = accInfo[w];
-      newRow.append(newCell);
-
-      // if (w > accInfo) {
-      //   let editCell = newRow.insertCell(w);
-      //   editCell.innerHTML = `
-      //     <a href="#" data-set=i>Edit</a>`
-      //   newRow.append(editCell);
-      // }
+      if (w < 4) {
+        let newCell = newRow.insertCell(w);
+        newCell.innerHTML = accInfo[w];
+        newRow.append(newCell);
+      } else if (w == 4) {
+        let editCell = newRow.insertCell(w);
+        let pEl = document.createElement("p");
+        pEl.innerHTML = `<a href = "#" data-set="${accInfo[w]}" onclick="editAcc()">Edit</a>`
+        pEl.classList.add("editLink");
+        editCell.append(pEl);
+        newRow.append(editCell);
+      }
     }
     tableEl.append(newRow);
   }
@@ -159,6 +161,20 @@ function tableRedraw() {
 
 // Edit account information
 function editAcc() {
+  document.getElementById("form").style.display = "block";
+  document.getElementById("testTable").style.display = "none";
+
+  document.getElementById("formbuttons").innerHTML = `<button id="cancel">Cancel</button> <button id ="changeInfo">Change Info</button>`;
+
+  document.getElementById("formHeader").innerHTML = "Change Information";
+
+  for (let i = 0; i < addAccounts.length; i++) {
+    if (addAccounts[i].edit == event.target.dataset.edit) {
+      console.log(event.target.dataset.edit);
+
+      
+    }
+  }
 
 }
 
