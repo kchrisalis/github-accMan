@@ -3,9 +3,9 @@ body {
 }
 
 .bg1{
-    background-color: grey;
-    /* background: url(images/citybg.jpg) no-repeat center fixed;
-    background-size: cover; */
+    /* background-color: grey; */
+    background: url(images/citybg.jpg) no-repeat center fixed;
+    background-size: cover;
 }
 
 .bg2 {

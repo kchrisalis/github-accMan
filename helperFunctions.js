@@ -1,7 +1,6 @@
 // Helper Functions 
 
 // Global Variables
-let id = 0;
 let user = document.getElementById("username");
 let pass = document.getElementById("password");
 let nUser = document.getElementById("newUser");
@@ -30,7 +29,7 @@ function initInfo() {
       username: "something",
       email: "something@gmail.com",
       password: "1234",
-      edit: -1
+      edit: 0
     }];
   }
 }
@@ -97,8 +96,8 @@ function check(array, userInputVal, checkItem) {
 }
 
 // Add Accounts to Array
-function addAcc() {
 
+function addAcc() {
   addAccounts.push({
     website: document.getElementById("webV").value,
     username: document.getElementById("userV").value,
@@ -108,6 +107,7 @@ function addAcc() {
   });
 
   localStorage.setItem('addAcc', JSON.stringify(addAccounts));
+  localStorage.setItem('id', JSON.stringify(id));
   console.log(addAccounts);
 
   // Clear Inputs
@@ -145,7 +145,7 @@ function tableRedraw() {
       } else if (w == 4) {
         let editCell = newRow.insertCell(w);
         let pEl = document.createElement("p");
-        pEl.innerHTML = `<a href = "#" data-set="${accInfo[w]}" onclick="editAcc()">Edit</a>`
+        pEl.innerHTML = `<a href = "#" data-id="${accInfo[w]}" onclick="editAcc()">Edit</a>`
         pEl.classList.add("editLink");
         editCell.append(pEl);
         newRow.append(editCell);
@@ -164,20 +164,53 @@ function editAcc() {
   document.getElementById("form").style.display = "block";
   document.getElementById("testTable").style.display = "none";
 
-  document.getElementById("formbuttons").innerHTML = `<button id="cancel">Cancel</button> <button id ="changeInfo">Change Info</button>`;
+  document.getElementById("formbuttons").innerHTML = `<button id="cancel">Cancel</button> <button id ="changeInfo" onclick="change()">Change Info</button><button onclick="deleteAccount()">Delete</button>`;
 
   document.getElementById("formHeader").innerHTML = "Change Information";
 
   for (let i = 0; i < addAccounts.length; i++) {
-    if (addAccounts[i].edit == event.target.dataset.edit) {
-      console.log(event.target.dataset.edit);
+    if (addAccounts[i].edit == event.target.dataset.id) {
+      console.log(event.target.dataset.id);
 
-      
+      document.getElementById("webV").value = addAccounts[i].website;
+      document.getElementById("userV").value = addAccounts[i].username;
+      document.getElementById("emailV").value = addAccounts[i].email;
+      document.getElementById("passV").value = addAccounts[i].password;
     }
   }
+
+  // need to add splice code
 
 }
 
 // redraw table function
 // individual ids
 // basically get the ids so that it can be deleted and edited
+
+function change() {
+  localStorage.setItem('addAcc', JSON.stringify(addAccounts));
+
+  clearDivs();
+  displayDiv("managePass");
+  document.getElementById('tableDiv').append(tableRedraw());
+  document.getElementById("form").style.display = "none";
+  document.getElementById("testTable").style.display = "block";
+
+}
+
+function deleteAccount() {
+  for (let i = 0; i < addAccounts.length; i++) {
+    if (addAccounts[i].edit == event.target.dataset.id) {
+      addAccounts.splice(i, 1);
+    }
+  }
+  
+  localStorage.setItem('addAcc', JSON.stringify(addAccounts));
+
+  clearDivs();
+  displayDiv("managePass");
+  
+  document.getElementById("form").style.display = "none";
+  document.getElementById("testTable").style.display = "block";
+  document.getElementById('tableDiv').append(tableRedraw());
+}

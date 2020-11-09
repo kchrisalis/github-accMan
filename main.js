@@ -3,6 +3,17 @@
 // Arrays
 let loginAccounts = initAcc();
 let addAccounts = initInfo();
+let id = initId();
+
+function initId (){
+  let storedId = localStorage.getItem('id');
+  if (storedId) {
+    return JSON.parse(storedId);
+  } else {
+    return 0;
+  }
+}
+
 
 // Event Listener
 document.addEventListener("click", clickHandler);
